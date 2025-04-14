@@ -41,3 +41,14 @@ final hasUserAppliedProvider = FutureProvider.family<bool, String>((ref, jobId) 
 
   return snapshot.docs.isNotEmpty;
 });
+final userRecruiterApplicationsCountProvider = FutureProvider<int>((ref) async {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  if (uid == null) return 0;
+
+  final snapshot = await FirebaseFirestore.instance
+      .collection('job_applications')
+      .where('recruiterId', isEqualTo: uid)
+      .get();
+
+  return snapshot.docs.length;
+});

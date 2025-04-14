@@ -1,4 +1,5 @@
 import 'package:feastfolio/jobcategory.dart';
+import 'package:feastfolio/userTypechecker.dart';
 import 'package:flutter/material.dart';
 import '../providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 class Signup extends ConsumerStatefulWidget {
-  const Signup({super.key});
+
+  final String usertype;
+
+  const Signup({
+    Key? key,
+    required this.usertype,
+  }) : super(key: key);
 
 
 
@@ -29,15 +36,16 @@ class _SignupState extends ConsumerState<Signup> {
       password: passwordController.text.trim(),
       name: nameController.text.trim(),
       phone: phoneController.text.trim(),
+      usertype: widget.usertype,
     );
 
     if (message != null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signup successful!')));
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => JobCategory()),
+        MaterialPageRoute(builder: (context) => UserTypeScreen()),
       );
     }
   }

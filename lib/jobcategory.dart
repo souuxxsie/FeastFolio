@@ -1,5 +1,6 @@
 import 'package:feastfolio/employeehomescreen.dart';
 import 'package:feastfolio/employerhomescreen.dart';
+import 'package:feastfolio/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import '../providers/auth_provider.dart';
@@ -15,17 +16,17 @@ class JobCategory extends ConsumerStatefulWidget {
 
 class _JobCategoryState extends ConsumerState<JobCategory> {
 
-  final uid = FirebaseAuth.instance.currentUser?.uid;
-
-  void setUserType(String type, Widget nextScreen) async {
-    if (uid != null) {
-      await ref.read(authControllerProvider).updateUserType(uid!, type);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Usertype "$type" saved!')),
-      );
-      Navigator.push(context, MaterialPageRoute(builder: (_) => nextScreen));
-    }
-  }
+  // final uid = FirebaseAuth.instance.currentUser?.uid;
+  //
+  // void setUserType(String type, Widget nextScreen) async {
+  //   if (uid != null) {
+  //     await ref.read(authControllerProvider).updateUserType(uid!, type);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Usertype "$type" saved!')),
+  //     );
+  //     Navigator.push(context, MaterialPageRoute(builder: (_) => nextScreen));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,11 @@ class _JobCategoryState extends ConsumerState<JobCategory> {
               children: [
                 GestureDetector(
                   onTap: (){
-                    setUserType('employee', Employeehomescreen());
+                    // setUserType('employee', Employeehomescreen());
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Signup(usertype: 'employee')),
+                    );
                   },
                   child: Container(
 
@@ -131,7 +136,12 @@ class _JobCategoryState extends ConsumerState<JobCategory> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    setUserType('employer', EmployerHomeScreen());
+                    // setUserType('employer', EmployerHomeScreen());
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Signup(usertype: 'employer')),
+                    );
+
                   },
                   child: Container(
 

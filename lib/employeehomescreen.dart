@@ -18,7 +18,7 @@ class _EmployeehomescreenState extends State<Employeehomescreen> {
   List<Widget> tabScreens = [
     Employeehome(),
     Employeenoti(),
-    Profilescreen(),
+    ProfileScreen(),
   ];
   Widget build(BuildContext context) {
     return Scaffold(

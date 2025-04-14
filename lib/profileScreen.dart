@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/auth_provider.dart';
 
-class Profilescreen extends ConsumerStatefulWidget {
-  const Profilescreen({super.key});
+class ProfileScreen extends ConsumerStatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
-  ConsumerState<Profilescreen> createState() => _ProfilescreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfilescreenState extends ConsumerState<Profilescreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   void logOut(BuildContext context) async {
     final authController = ref.read(authControllerProvider);

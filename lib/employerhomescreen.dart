@@ -16,7 +16,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
   List<Widget> tabScreens = [
     Employerhome(),
     Addjobs(),
-    Profilescreen(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

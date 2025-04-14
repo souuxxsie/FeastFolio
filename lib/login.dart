@@ -2,6 +2,7 @@ import 'package:feastfolio/employeehome.dart';
 import 'package:feastfolio/employeehomescreen.dart';
 import 'package:feastfolio/employerhome.dart';
 import 'package:feastfolio/employerhomescreen.dart';
+import 'package:feastfolio/jobcategory.dart';
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import '../providers/auth_provider.dart';
@@ -221,7 +222,7 @@ class _LoginState extends ConsumerState<Login> {
                             onTap: (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Signup()),
+                                MaterialPageRoute(builder: (context) => JobCategory()),
                               );
                             },
                             child: textWidget('Sign up'),

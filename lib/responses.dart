@@ -16,6 +16,7 @@ class _ResponsesState extends ConsumerState<Responses> {
   @override
   Widget build(BuildContext context) {
     final job_applications = ref.watch(userRecruiterApplicationsProvider);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -46,6 +47,7 @@ class _ResponsesState extends ConsumerState<Responses> {
                     final applicantId = data['applicantId'];
                     final jobId = data['jobId'];
                     final appliedAtTimestamp = data['appliedAt'];
+                    final status = data['status'];
                     final appliedAt = appliedAtTimestamp?.toDate() ?? DateTime.now();
 
                     final jobDetailsAsync = ref.watch(getJobsByIdProvider(jobId));
@@ -59,7 +61,7 @@ class _ResponsesState extends ConsumerState<Responses> {
                           data: (applicantData) {
                             final applicantName = applicantData?['name'] ?? 'Unknown User';
 
-                            return responseTile(applicantName, jobTitle, appliedAt);
+                            return responseTile(applicantName, jobTitle, appliedAt, status);
                           },
                           loading: () => const Padding(
                             padding: EdgeInsets.all(12.0),
@@ -92,7 +94,7 @@ class _ResponsesState extends ConsumerState<Responses> {
     );
   }
 
-  Widget responseTile(String employee, String jobTitle, DateTime datetime) {
+  Widget responseTile(String employee, String jobTitle, DateTime datetime, String status) {
     String formattedDate = DateFormat('yyyy-MM-dd HH:mm').format(datetime);
 
     return Container(
@@ -188,20 +190,69 @@ class _ResponsesState extends ConsumerState<Responses> {
           Positioned(
             bottom: 0,
             right: 0,
-            child: GestureDetector(
-              onTap: () {
-                // TODO: Handle delete
-              },
-              child: Text(
-                'Delete',
-                style: TextStyle(
-                  color: Colors.red[700],
-                  fontFamily: 'poppins',
-                  fontSize: 13,
+            child: status == 'pending'
+                ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // TODO: Approve logic
+                    print('Approved');
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    margin: const EdgeInsets.only(right: 8),
+                    decoration: BoxDecoration(
+
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'Approve',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'poppins',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
                 ),
+                GestureDetector(
+                  onTap: () {
+                    // TODO: Reject logic
+                    print('Rejected');
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'Reject',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'poppins',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+                : Text(
+              status,
+              style: TextStyle(
+                color: status == 'approved'
+                    ? Colors.green[600]
+                    : status == 'rejected'
+                    ? Colors.red[700]
+                    : Colors.black,
+                fontFamily: 'poppins',
+                fontSize: 13,
               ),
             ),
           ),
+
         ],
       ),
     );

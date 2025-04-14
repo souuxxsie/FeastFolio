@@ -15,6 +15,7 @@ class AuthController {
     required String password,
     required String name,
     required String phone,
+    required String usertype,
   }) async {
     try {
       UserCredential userCredential = await ref
@@ -29,6 +30,7 @@ class AuthController {
         'email': email,
         'name': name,
         'phone': phone,
+        'usertype' : usertype,
         'createdAt': FieldValue.serverTimestamp(),
 
       });

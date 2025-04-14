@@ -169,7 +169,7 @@ class _JobsCreatedScreenState extends ConsumerState<JobsCreatedScreen> {
               bottom: 0,
               right: 0,
               child: Text(
-                '₹$salary / Mo',
+                '₹$salary Per Annum',
                 style: const TextStyle(
                   fontSize: 12,
                   fontFamily: 'poppins',
